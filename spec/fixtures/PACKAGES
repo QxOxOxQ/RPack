@@ -1,0 +1,26 @@
+Package: XML2R
+Version: 0.0.6
+Depends: R (>= 2.15.1), XML
+Imports: RCurl, plyr
+License: GPL (>= 2)
+NeedsCompilation: no
+
+Package: Package
+Version: 1.0.2
+Depends: R (>= 3.0.0)
+Suggests: covr, testthat, xml2
+License: MIT + file LICENSE
+NeedsCompilation: no
+
+Package: Version
+Version: 1.1
+Imports: curl, xml2, base64enc
+License: GPL-3
+NeedsCompilation: no
+
+Package: XMRF
+Version: 1.0
+Depends: R (>= 3.0.2)
+Imports: igraph, glmnet, MASS, snowfall, parallel, Matrix
+License: GPL-2
+NeedsCompilation: yes
