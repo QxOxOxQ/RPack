@@ -60,6 +60,8 @@ module Services
             fetch.drop if fetch
             unzip.drop if unzip
           end
+        ensure
+          report
         end
 
         def progressbar(total)
@@ -83,12 +85,12 @@ module Services
         end
 
         def report
-          report = {
+          report_hash = {
               saved: @saved_count,
               errors: @errors
           }
-          @logger.info(report)
-          report
+          @logger.info(report_hash)
+          report_hash
         end
     end
   end

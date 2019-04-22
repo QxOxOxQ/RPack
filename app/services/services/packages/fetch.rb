@@ -17,7 +17,7 @@ module Services
       def call
         download
         destination_path
-      rescue OpenURI::HTTPError => e
+      rescue OpenURI::HTTPError, Errno::ETIMEDOUT => e
         errors["#{@package}_#{@version}"] = e
       end
 

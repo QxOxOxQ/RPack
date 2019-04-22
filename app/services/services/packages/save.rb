@@ -30,7 +30,7 @@ module Services
         def package_attributes
           attr = {}
           file.lines.each_with_index do |line, index|
-            case line
+            case encode_to_utf8(line)
             when /^Package:/
               attr[:name] = parse_line("Package:", line, index)
             when /^Description:/
@@ -55,7 +55,7 @@ module Services
 
         def parse_line(attr, line, index)
           line = encode_to_utf8(line)
-          key_size = attr.size + 2
+          key_size = attr.size + 1
           text = line[key_size..-1]
           next_line = encode_to_utf8(@file.lines[index + 1])
           if next_line && /       /.match?(next_line)

@@ -34,7 +34,8 @@ RSpec.describe Services::Packages::Refresh, type: :service do
   end
   context "when processed all services" do
     it "return packges" do
-      expect(described_class.call(description_path_file)).to eq(p: :v, p1: :v1, p2: :v2)
+      expect(described_class.call(description_path_file)).to eq(errors: { fetch: [], save: [] },
+                                                                saved: 3)
     end
   end
 end
