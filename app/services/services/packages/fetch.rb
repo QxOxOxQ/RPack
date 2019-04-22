@@ -5,18 +5,24 @@ require "open-uri"
 module Services
   module Packages
     class Fetch < Services::Application
-      BASE_URL = "https://cran.r-project.org/src/contrib/"
+      BASE_URL = "https://cran.r-project.org/src/contrib"
       EXTENSION = "tar.gz"
-
+      attr_reader :errors
       def initialize(package, version)
         @package = package
         @version = version
-        @error = {}
+        @errors = {}
       end
 
       def call
         download
         destination_path
+      rescue OpenURI::HTTPError => e
+        errors["#{@package}_#{@version}"] = e
+      end
+
+      def valid?
+        errors.empty?
       end
 
       def drop

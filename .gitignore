@@ -16,6 +16,7 @@
 /tmp/*
 !/log/.keep
 !/tmp/.keep
+lib/tmp_packages/logfile.log
 
 # Ignore uploaded files in development
 /storage/*

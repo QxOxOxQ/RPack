@@ -3,41 +3,74 @@
 module Services
   module Packages
     class Save < Services::Application
+      attr_reader :errors
+
       def initialize(file_path)
         @file_path = file_path
+        @errors = {}
       end
 
       def call
+        package = Package.new(package_attributes)
         if package.save
           package
         else
-          { @file_path => package.errors }
+          errors[@file_path] = package.errors
         end
+      rescue ArgumentError, ActiveRecordError => e
+        errors[@file_path] = e
+      end
+
+      def valid?
+        errors.empty?
       end
 
       private
 
-        def package
-          @package ||= Package.new(
-            name: find_and_parse("Package"),
-            description: find_and_parse("Description"),
-            title: find_and_parse("Title"),
-            authors: find_and_parse("Author"),
-            version: find_and_parse("Version"),
-            maintainers: find_and_parse("Maintainer"),
-            license: find_and_parse("License"),
-            publication_date: Time.parse(find_and_parse("Date/Publication"))
-          )
+        def package_attributes
+          attr = {}
+          file.lines.each_with_index do |line, index|
+            case line
+            when /^Package:/
+              attr[:name] = parse_line("Package:", line, index)
+            when /^Description:/
+              attr[:description] = parse_line("Description:", line, index)
+            when /^Title:/
+              attr[:title] = parse_line("Title:", line, index)
+            when /^Author:/
+              attr[:authors] = parse_line("Author:", line, index)
+            when /^Version:/
+              attr[:version] = parse_line("Version:", line, index)
+            when /^Maintainer:/
+              attr[:maintainers] = parse_line("Maintainer:", line, index)
+            when /^License:/
+              attr[:license] = parse_line("License:", line, index)
+            when /^Date\/Publication:/
+              date = parse_line("License:", line, index)
+              attr[:publication_date] = DateTime.parse(date) if date.present?
+            end
+          end
+          attr
         end
 
-        def find_and_parse(attr)
-          keys_with_values = IO.foreach(file).grep(/#{attr}:/)
+        def parse_line(attr, line, index)
+          line = encode_to_utf8(line)
           key_size = attr.size + 2
-          keys_with_values[0][key_size..-1].delete!("\n")  # output only attributes
+          text = line[key_size..-1]
+          next_line = encode_to_utf8(@file.lines[index + 1])
+          if next_line && /       /.match?(next_line)
+            text = "#{text}#{next_line[7..-1]}"
+          end
+          text.delete("\n") # output only attributes
+        end
+
+        def encode_to_utf8(line)
+          return if line.nil? || line.empty?
+          line.encode("UTF-8", "binary", invalid: :replace, undef: :replace, replace: "")
         end
 
         def file
-          @file ||= File.open(Rails.root.join(@file_path))
+          @file ||= File.open(Rails.root.join(@file_path)).read
         end
     end
   end
