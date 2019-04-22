@@ -25,7 +25,7 @@ App refreshes only diffrence with present packages
 So only first time it during long time
 
 ### Delete outdated packages
-outdated records are marked by columns `delted_at` if you want to delete them use this
+outdated records are marked by columns `deleted_at` if you want to delete them use this
 ```bash
 rake refresh:delete_outdated
 ```

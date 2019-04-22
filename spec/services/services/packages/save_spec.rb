@@ -9,8 +9,8 @@ RSpec.describe Services::Packages::Save, type: :service do
 
   context "with valid attributes" do
     it "save package" do
-      service = described_class.new
-      expect { service.call(file_path) }.to change(Package, :count).by(1)
+      service = described_class.new(file_path)
+      expect { service.call }.to change(Package, :count).by(1)
       package = Package.last
       aggregate_failures do
         expect(package.name).to eq "ATE"

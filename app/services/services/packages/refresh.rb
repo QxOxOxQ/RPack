@@ -25,7 +25,8 @@ module Services
         save_packages(hash_description_to_fetch)
 
         log_end
-        report
+      ensure
+        return report
       end
 
       private
@@ -60,8 +61,6 @@ module Services
             fetch.drop if fetch
             unzip.drop if unzip
           end
-        ensure
-          report
         end
 
         def progressbar(total)

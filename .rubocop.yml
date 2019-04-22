@@ -1,4 +1,6 @@
 require: rubocop-rspec
+AllCops:
+  TargetRubyVersion: 2.6.1
 
 inherit_gem:
   rubocop-rails:
