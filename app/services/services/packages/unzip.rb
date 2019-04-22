@@ -15,7 +15,7 @@ module Services
           Zlib::GzipReader.wrap(file) do |gz|
             Gem::Package::TarReader.new(gz) do |tar|
               tar.each do |entry|
-                if entry.full_name == "ATE/DESCRIPTION"
+                if /DESCRIPTION/.match?(entry.full_name)
                   File.open(destination_path, "wb") do |f|
                     f.write(entry.read)
                   end

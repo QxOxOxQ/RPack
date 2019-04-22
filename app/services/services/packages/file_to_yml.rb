@@ -25,11 +25,11 @@ module Services
         end
 
         def packages
-          find_and_parse("Package")
+          @packages ||= find_and_parse("Package")
         end
 
         def versions
-          find_and_parse("Version")
+          @versions ||= find_and_parse("Version")
         end
 
         def find_and_parse(attr)

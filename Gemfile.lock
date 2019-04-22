@@ -194,6 +194,7 @@ DEPENDENCIES
   rspec-rails (~> 3.8)
   rubocop-rails
   rubocop-rspec
+  ruby-progressbar
   spring
   spring-watcher-listen (~> 2.0.0)
   sqlite3
