@@ -1,0 +1,15 @@
+4a0178c828dc4851aece8b502cbc8fc1 *DESCRIPTION
+4f537421218d859f44c2cd64bc4bbf4e *NAMESPACE
+cfa171a2ec22fb3b4aed743c0ec9fb09 *R/extra_functions.R
+f477514b769f4b743c9423baf281d3c8 *R/objects.R
+eaedce43032fa683ee4d64b5ca6693c3 *R/point_estimates.R
+d0e72ad4fa5e6d4e381e1091492a77eb *R/variance_estimates.R
+1d3af9cbc5e73c48f89d0f516a916b53 *data/nhanes_bmi.RData
+920630cc0618acc4d062821a25a5d0d7 *data/nsw.RData
+6c2cd2c612fc752eed215ec33728c0f1 *man/ATE-package.Rd
+64fbbaaba58cf1cdefc8fb08e60df7b0 *man/ATE.Rd
+226881758274e6dba83f4954a871d182 *man/cr-fun.Rd
+c39e95775ba3203ce5ca250d9947960e *man/nhanes_bmi.Rd
+099873fa5c5babca5ab3f4261ad9feed *man/nsw.Rd
+072827ce34744ec761ebf8033f92ae6a *man/plot.ATE.Rd
+13063c2a397231afec086523460e14e6 *man/summary.ATE.Rd

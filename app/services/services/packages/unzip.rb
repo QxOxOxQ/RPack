@@ -1,5 +1,6 @@
 # frozen_string_literal: true
-require 'rubygems/package'
+
+require "rubygems/package"
 
 module Services
   module Packages
@@ -10,12 +11,12 @@ module Services
       end
 
       def call
-        File.open(@file_path, 'rb') do |file|
+        File.open(@file_path, "rb") do |file|
           Zlib::GzipReader.wrap(file) do |gz|
             Gem::Package::TarReader.new(gz) do |tar|
               tar.each do |entry|
                 if entry.full_name == "ATE/DESCRIPTION"
-                  File.open(destination_path, 'wb') do |f|
+                  File.open(destination_path, "wb") do |f|
                     f.write(entry.read)
                   end
                 end
@@ -23,6 +24,7 @@ module Services
             end
           end
         end
+        destination_path
       end
 
       def drop
@@ -31,13 +33,13 @@ module Services
 
       private
 
-      def destination_path
-        "lib/tmp_packages/descriptions/#{file_name}"
-      end
+        def destination_path
+          "lib/tmp_packages/descriptions/#{file_name}"
+        end
 
-      def file_name
-        @file_path.split('/')[-1][0..-8]
-      end
+        def file_name
+          @file_path.split("/")[-1][0..-8]
+        end
     end
   end
 end

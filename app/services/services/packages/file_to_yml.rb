@@ -34,7 +34,8 @@ module Services
 
         def find_and_parse(attr)
           keys_with_values = IO.foreach(file).grep(/#{attr}:/)
-          keys_with_values.map { |x| x.split(": ")[1][0..-2] } # output only attributes
+          key_size = attr.size + 2
+          keys_with_values.map { |x| x[key_size..-1].delete!("\n") } # output only attributes
         end
 
         def file

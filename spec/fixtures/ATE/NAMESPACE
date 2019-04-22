@@ -1,0 +1,7 @@
+export(cr.rho, d.cr.rho, dd.cr.rho, ATE)
+
+S3method(print, ATE)
+S3method(summary, ATE)
+S3method(plot, ATE)
+
+S3method(print, summary.ATE) 
