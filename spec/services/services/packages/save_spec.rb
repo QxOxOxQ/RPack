@@ -12,6 +12,7 @@ RSpec.describe Services::Packages::Save, type: :service do
       expect { described_class.call(file_path) }.to change(Package, :count).by(1)
       package = Package.last
       aggregate_failures do
+        expect(package.name).to eq "ATE"
         expect(package.description).to eq "Nonparametric estimation and inference for average treatment effects based on covariate balancing."
         expect(package.title).to eq "Inference for Average Treatment Effects using Covariate Balancing"
         expect(package.authors).to eq "Asad Haris <aharis@uw.edu> and Gary Chan <kcgchan@uw.edu>"

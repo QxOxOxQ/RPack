@@ -2,6 +2,7 @@
 
 FactoryBot.define do
   factory :package do
+    name { "MyString" }
     description { "MyString" }
     title { "MyString" }
     authors { "MyString" }

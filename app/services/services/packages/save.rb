@@ -19,6 +19,7 @@ module Services
 
         def package
           @package ||= Package.new(
+            name: find_and_parse("Package"),
             description: find_and_parse("Description"),
             title: find_and_parse("Title"),
             authors: find_and_parse("Author"),
