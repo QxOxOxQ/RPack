@@ -61,7 +61,7 @@ module Services
           if next_line && /       /.match?(next_line)
             text = "#{text}#{next_line[7..-1]}"
           end
-          text.delete("\n") # output only attributes
+          text.delete("\n\r") # output only attributes
         end
 
         def encode_to_utf8(line)
