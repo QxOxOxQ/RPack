@@ -1,6 +1,10 @@
 # R Packages
 use to download information about R packages
 
+##
+1. All logic is in services
+1. tests are in specs
+
 ## Setup
 1. `bundle`
 1. setup db `rake db:setup`
